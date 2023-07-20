@@ -12,17 +12,46 @@
 </head>
 
 <body>
-    <div class="button">
-        <p class="create-button"><i class="fa-solid fa-plus"></i></p>
-    </div>
-    
-    <div class="panel-container">
-       <div class="panel" id="to-do">TO DO</div>
-       <div class="panel" id="in-progress">IN PROGRESS</div>
-       <div class="panel" id="done">DONE <i class="fa-solid fa-check" style="color: #1eff00;"></i></div>
+    <div class="head-container">
+        <div class="project-dropdown-container">
+            <div class="dropdown-button" onclick="toggleProjectDropDown()">
+                <h3>Teams</h3>
+                <i class="fa-solid fa-caret-down" style="color: #000000;"></i>
+            </div>
+            <div class="dropdown-list">
+                <div>
+                    <i class="fa-solid fa-plus" style="color: #000000;"></i>
+                    <a href = "#">Invite People to Jira</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-user" style="color: #000000;"></i>
+                    <a href = "#">Create a team</a>
+                </div>
+            </div>
+        </div>
+        <div class="button">
+            <p class="create-button"><i class="fa-solid fa-plus"></i></p>
+        </div>
+
     </div>
 
-    <!-- <div class="modal">
+    <div class="panel-container">
+        <div class="panel" id="TODO">TO DO
+
+            <!-- <div class="task" draggable="true">
+                <h3>Title</h3>
+                <strong class="assinee-name">Tanmay Jain</strong>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima aliquid eveniet magni repellat nobis.
+                </p>
+            </div> -->
+        </div>
+        <div class="panel" id="IN_PROGRESS">IN PROGRESS</div>
+        <div class="panel" id="DONE">
+            <div>
+                DONE <i class="fa-solid fa-check" style="color: #1eff00;"></i>
+            </div>
+
+            <!-- <div class="modal">
         <div class="modal-container">
             <form>
                 <input type="text" name="title" placeholder="Title" required>
@@ -37,7 +66,9 @@
             </form>
         </div>
     </div> -->
-    <script src="script.js"></script>
+
+
+            <script src="script.js"></script>
 </body>
 
 </html>
