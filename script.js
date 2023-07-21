@@ -59,18 +59,25 @@ function listener() {
 //     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima aliquid eveniet magni repellat nobis.
 //     </p>
 // </div> */}
-
+let count = 0;
 function createTask(obj) {
-    console.log(obj);
+    
     const task = document.createElement("div");
     task.className = "task";
     task.draggable = "true";
+    task.id = `task-${count}`;
+    count++;
     task.innerHTML = `<h4>${obj.title}</h4>
     <b class="assinee-name">${obj.assignee}</b>
     <p>${obj.description}</p>`
-
+    
+    task.addEventListener("dragstart", (event) => {
+        event.dataTransfer.setData("source", task.id);
+        event.dataTransfer.setData("parent", obj.status);
+    })
     const status = document.getElementById(obj.status);
     status.appendChild(task);
+   
 }
 
 
@@ -81,4 +88,20 @@ function toggleProjectDropDown()
     const projectDropdownList = document.getElementsByClassName("dropdown-list")[0];
     projectDropdownList.style.display = (projectDropdownList.style.display == "none") ? (projectDropdownList.style.display = "block") : (projectDropdownList.style.display = "none");
 
+}
+
+const panels = document.getElementsByClassName("panel");
+
+for(let i=0;i<panels.length;i++)
+{
+    panels[i].addEventListener("dragover", (event) => {
+        event.preventDefault();
+    })
+    panels[i].addEventListener("drop", (event) => {
+        const parentId = event.dataTransfer.getData("parent");
+        const sourceId = event.dataTransfer.getData("source");
+        const draggableElement = document.getElementById(sourceId);
+        event.target.appendChild(draggableElement);
+        
+    })
 }
