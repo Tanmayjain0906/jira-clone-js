@@ -61,7 +61,7 @@ function listener() {
 // </div> */}
 let count = 0;
 function createTask(obj) {
-    
+
     const task = document.createElement("div");
     task.className = "task";
     task.draggable = "true";
@@ -70,21 +70,21 @@ function createTask(obj) {
     task.innerHTML = `<h4>${obj.title}</h4>
     <b class="assinee-name">${obj.assignee}</b>
     <p>${obj.description}</p>`
-    
+
     task.addEventListener("dragstart", (event) => {
         event.dataTransfer.setData("source", task.id);
-        event.dataTransfer.setData("parent", obj.status);
+        event.dataTransfer.setData("parent", task.parentElement.id);
+        const ids = obj.status;
     })
     const status = document.getElementById(obj.status);
     status.appendChild(task);
-   
+
 }
 
 
 
 let openBox = false;
-function toggleProjectDropDown()
-{
+function toggleProjectDropDown() {
     const projectDropdownList = document.getElementsByClassName("dropdown-list")[0];
     projectDropdownList.style.display = (projectDropdownList.style.display == "none") ? (projectDropdownList.style.display = "block") : (projectDropdownList.style.display = "none");
 
@@ -92,16 +92,23 @@ function toggleProjectDropDown()
 
 const panels = document.getElementsByClassName("panel");
 
-for(let i=0;i<panels.length;i++)
-{
+
+for (let i = 0; i < panels.length; i++) {
+
+   
     panels[i].addEventListener("dragover", (event) => {
         event.preventDefault();
     })
     panels[i].addEventListener("drop", (event) => {
         const parentId = event.dataTransfer.getData("parent");
         const sourceId = event.dataTransfer.getData("source");
+        if(parentId === panels[i].id)
+        {
+            return;
+        }
         const draggableElement = document.getElementById(sourceId);
-        event.target.appendChild(draggableElement);
-        
+        panels[i].appendChild(draggableElement);
+
     })
+
 }
